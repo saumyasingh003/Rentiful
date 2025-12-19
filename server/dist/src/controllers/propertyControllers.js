@@ -1,11 +1,12 @@
-import { Prisma } from "../../generated/prisma/client.js";
+// @ts-ignore - Path is correct at runtime from dist/src/controllers/
+import { Prisma } from "../../../generated/prisma/index.js";
 import { prisma } from "../lib/prisma.js";
 import { wktToGeoJSON } from "@terraformer/wkt";
 import { S3Client } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 import axios from "axios";
 const s3Client = new S3Client({
-    region: process.env.AWS_REGION || ""
+    region: process.env.AWS_REGION || "",
 });
 export const getProperties = async (req, res) => {
     try {
