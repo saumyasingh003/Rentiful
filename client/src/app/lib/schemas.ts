@@ -1,12 +1,12 @@
 import * as z from "zod";
-import   { PropertyTypeEnum } from "./constants";
+import { PropertyTypeEnum } from "./constants";
 
 export const propertySchema = z.object({
   name: z.string().min(1, "Name is required"),
   description: z.string().min(1, "Description is required"),
-  pricePerMonth: z.coerce.number().positive().min(0).int(),
-  securityDeposit: z.coerce.number().positive().min(0).int(),
-  applicationFee: z.coerce.number().positive().min(0).int(),
+  pricePerMonth: z.number().int().positive(),
+  securityDeposit: z.number().int().nonnegative(),
+  applicationFee: z.number().int().nonnegative(),
   isPetsAllowed: z.boolean(),
   isParkingIncluded: z.boolean(),
   photoUrls: z
@@ -14,9 +14,9 @@ export const propertySchema = z.object({
     .min(1, "At least one photo is required"),
   amenities: z.string().min(1, "Amenities are required"),
   highlights: z.string().min(1, "Highlights are required"),
-  beds: z.coerce.number().positive().min(0).max(10).int(),
-  baths: z.coerce.number().positive().min(0).max(10).int(),
-  squareFeet: z.coerce.number().int().positive(),
+  beds: z.number().int().min(1).max(10),
+  baths: z.number().int().min(1).max(10),
+  squareFeet: z.number().int().positive(),
   propertyType: z.nativeEnum(PropertyTypeEnum),
   address: z.string().min(1, "Address is required"),
   city: z.string().min(1, "City is required"),

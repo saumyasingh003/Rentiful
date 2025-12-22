@@ -44,15 +44,15 @@ interface FormFieldProps {
   name: string;
   label: string;
   type?:
-    | "text"
-    | "email"
-    | "textarea"
-    | "number"
-    | "select"
-    | "switch"
-    | "password"
-    | "file"
-    | "multi-input";
+  | "text"
+  | "email"
+  | "textarea"
+  | "number"
+  | "select"
+  | "switch"
+  | "password"
+  | "file"
+  | "multi-input";
   placeholder?: string;
   options?: { value: string; label: string }[];
   accept?: string;
@@ -145,6 +145,10 @@ export const CustomFormField: React.FC<FormFieldProps> = ({
             placeholder={placeholder}
             disabled={disabled}
             className={`p-4 ${inputClassName}`}
+            onChange={(e) => {
+              const value = e.target.value;
+              field.onChange(value === "" ? "" : Number(value));
+            }}
           />
         );
 
