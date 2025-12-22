@@ -37,9 +37,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Handle preflight requests
-app.options("*", cors(corsOptions));
-
 // Ensure CORS headers on all responses (important for AWS API Gateway)
 app.use((req, res, next) => {
   const origin = req.headers.origin;
